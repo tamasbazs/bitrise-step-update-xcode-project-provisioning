@@ -1,0 +1,107 @@
+#
+# A couple of useful guides & docs:
+#
+# - Main Bitrise CLI docs: https://github.com/bitrise-io/bitrise/tree/master/_docs
+# - Step Development Guideline: https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
+# - Bitrise.yml format spec: https://github.com/bitrise-io/bitrise/blob/master/_docs/bitrise-yml-format-spec.md
+# - Bitrise docs: http://devcenter.bitrise.io/
+# - Bitrise CLI guides: http://devcenter.bitrise.io/bitrise-cli/
+
+title: |-
+  Update Xcode Project Provisioning
+summary: |
+  Updates Xcode's project file signing config to use a specific certificate and provisioning profile
+description: |
+  Updates Xcode's project file signing config to use a specific certificate and provisioning profile
+website: https://github.com/cupojoe/bitrise-step-update-xcode-project-provisioning
+source_code_url: https://github.com/cupojoe/bitrise-step-update-xcode-project-provisioning.git
+support_url: https://github.com/cupojoe/bitrise-step-update-xcode-project-provisioning/issues
+host_os_tags:
+  - osx-10.10
+project_type_tags:
+  - ios
+type_tags:
+  - utility
+  - code-sign
+
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+
+toolkit:
+  bash:
+    entry_file: step.sh
+
+inputs:
+  - xcode_xcodeproj_file: 
+    opts:
+      title: "Xcode project.xcodeproj Path"
+      summary: "Your project.xcodeproj file path."
+      description: |
+        Your project.xcodeproj file path. (e.g. MyAwesomeProject/MyAwesomeProject.xcodeproj)  
+        Provide `.xcodeproj` path even if using `.xcworkspace`.
+      is_expand: true
+      is_required: true
+      value_options: []
+  - project_target: 
+    opts:
+      title: "Project Target"
+      summary: "Project Target Name"
+      description: |
+        The target name of your Xcode project. (e.g. MyAwesomeProject)
+      is_expand: true
+      is_required: true
+      value_options: []
+  - code_sign_style: Automatic
+    opts:
+      title: "Code Sign Style"
+      summary: "The **CODE__SIGN__STYLE** value will be replaced."
+      description: |
+        The **CODE__SIGN__STYLE** value will be replaced.  
+        Value either `Automatic` or `Manual`.
+      is_expand: true
+      is_required: true
+      value_options: ["Automatic", "Manual"]
+
+  - development_team: 
+    opts:
+      title: "Development Team"
+      summary: "The **configurations** of **DEVELOPMENT_TEAM** value will be replaced."
+      description: |
+        The **configurations** of **DEVELOPMENT_TEAM** value will be replaced.  
+        Left blank means `None`.
+      is_expand: true
+      is_required: false
+      value_options: []
+  - code_sign_identity: 
+    opts:
+      title: "Code Sign Identity"
+      summary: "The **configurations** of **CODE__SIGN__IDENTITY** value will be replaced."
+      description: |
+        The **configurations** of **CODE__SIGN__IDENTITY** value will be replaced.   
+        Value will be `iPhone Developer`, `iPhone Distribution` or others.
+      is_expand: true
+      is_required: true
+      value_options: []
+  - provisioning_profile_specifier: 
+    opts:
+      title: "Provisioning Profile Specifier"
+      summary: "The **configurations** of **PROVISIONING__PROFILE__SPECIFIER** value will be replaced."
+      description: |
+        The **configurations** of **PROVISIONING__PROFILE__SPECIFIER** value will be replaced.  
+        Please specify the provisioning profile name which is same as one created at **Certificates, Identifiers & Profiles** at **Apple Developer Program**.  
+        Don't forget to upload that provisioning profile file.
+      is_expand: true
+      is_required: true
+      value_options: []
+
+  - dry_run: "no"
+    opts:
+      title: "Dry-run preview (settings preview)"
+      summary: "If set this value `yes`, it will Dry-run this steps to preview the signing settings."
+      description: |
+        If set this value `yes`, it will Dry-run this steps to preview the signing settings.
+      is_expand: true
+      is_required: true
+      value_options: ["no", "yes"]
