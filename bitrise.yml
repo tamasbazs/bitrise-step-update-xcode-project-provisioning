@@ -74,13 +74,24 @@ workflows:
         - path: ./_tmp
         - is_create_path: true
     - path::./:
-        title: Step Test
+        title: Step Test iOS
         run_if: "true"
         inputs:
         - xcode_xcodeproj_file: MyAwesomeProject.xcodeproj
         - project_target: MyAwesomeProjectDEV
         - code_sign_style: Manual
         - development_team: ABCDEFGHIJ
-        - code_sign_identity: iPhone Developer
+        - code_sign_identity: iPhone Distribution
         - provisioning_profile_specifier: MyAwesomeProjectDEV_Development
+        - dry_run: "no"
+    - path::./:
+        title: Step Test Mac
+        run_if: "true"
+        inputs:
+        - xcode_xcodeproj_file: TestProject-Mac.xcodeproj
+        - project_target: FluxorExplorer
+        - code_sign_style: Manual
+        - development_team: ABCDEFGHIJ
+        - code_sign_identity: iPhone Distribution
+        - provisioning_profile_specifier: FluxorExplorerDEV_Development
         - dry_run: "no"
