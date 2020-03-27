@@ -66,8 +66,18 @@ target.build_configurations.each do |build_configurations|
 	configSettings = build_configurations.build_settings
 	configSettings["CODE_SIGN_STYLE"] = $code_sign_style
 	configSettings["DEVELOPMENT_TEAM"] = $development_team
-	configSettings["CODE_SIGN_IDENTITY"] = $code_sign_identity
-	configSettings["PROVISIONING_PROFILE_SPECIFIER"] = $provisioning_profile_specifier
+	if configSettings["CODE_SIGN_IDENTITY"]
+		configSettings["CODE_SIGN_IDENTITY"] = $code_sign_identity
+	end
+	if configSettings["CODE_SIGN_IDENTITY[sdk=macosx*]"]
+		configSettings["CODE_SIGN_IDENTITY[sdk=macosx*]"] = $code_sign_identity
+	end
+	if configSettings["PROVISIONING_PROFILE_SPECIFIER"]
+		configSettings["PROVISIONING_PROFILE_SPECIFIER"] = $provisioning_profile_specifier
+	end
+	if configSettings["PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]"]
+		configSettings["PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]"] = $provisioning_profile_specifier
+	end
 end
 
 puts
