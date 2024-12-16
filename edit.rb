@@ -72,9 +72,7 @@ target.build_configurations.each do |build_configurations|
 	if configSettings["CODE_SIGN_IDENTITY[sdk=macosx*]"]
 		configSettings["CODE_SIGN_IDENTITY[sdk=macosx*]"] = $code_sign_identity
 	end
-	if configSettings["PROVISIONING_PROFILE_SPECIFIER"]
-		configSettings["PROVISIONING_PROFILE_SPECIFIER"] = $provisioning_profile_specifier
-	end
+	configSettings["PROVISIONING_PROFILE_SPECIFIER"] = $provisioning_profile_specifier
 	if configSettings["PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]"]
 		configSettings["PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]"] = $provisioning_profile_specifier
 	end
